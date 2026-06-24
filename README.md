@@ -12,7 +12,7 @@
 I've spent **8+ years** building backend systems that don't just ship — they hold up when things get messy.
 
 - 🏗️ Designing and delivering scalable **microservices**, event-driven architectures, and cloud infrastructure
-- 🚀 Currently **Lead Engineer at StudyIn** — powering thousands of student journeys, 50k+ daily active users
+- 🚀 Currently **Lead Engineer at StudyIn**
 - 🛠️ I build things outside of work too — open-source tools, VS Code extensions, Linux utilities, and Chrome extensions
 - 📝 I write about backend engineering & system design on [Medium](https://medium.com/@piyushdoorwar)
 - 📍 Based in Mumbai · He/Him
