@@ -43,7 +43,7 @@ I've spent **8+ years** building backend systems that don't just ship — they h
 ### 📬 Connect with Me
 
 <p>
-  <a href="https://linkedin.com/in/piyushdoorwar"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" /></a>
+  <a href="https://linkedin.com/in/piyushdoorwar"><img src="https://img.shields.io/badge/LinkedIn-piyushdoorwar-0A66C2?style=flat-square&logo=linkedin&logoColor=white&labelColor=0A66C2" /></a>
   <a href="https://medium.com/@piyushdoorwar"><img src="https://img.shields.io/badge/Medium-000000?style=flat-square&logo=medium&logoColor=white" /></a>
   <a href="mailto:piyushdoorwar@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white" /></a>
 </p>
