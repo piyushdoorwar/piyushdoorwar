@@ -40,22 +40,6 @@ I've spent **8+ years** building backend systems that don't just ship — they h
 
 ---
 
-### 🚀 Featured Projects
-
-| Project | Description | Stack |
-|---|---|---|
-| [**lumyn-media-player**](https://github.com/piyushdoorwar/lumyn-media-player) | Open-source cross-platform media player with Chromecast support | C#, .NET, mpv |
-| [**ask-better**](https://github.com/piyushdoorwar/ask-better) | Chrome extension to optimize prompts & rephrase text across ChatGPT & Gemini | JS, Manifest V3 |
-| [**gitable**](https://github.com/piyushdoorwar/gitable) | Git sidebar for VS Code — stage, commit & AI-powered code review | TypeScript |
-| [**NuGetLL**](https://github.com/piyushdoorwar/NuGetLL) | NuGet package manager & Library Lens for VS Code workspaces | TypeScript |
-| [**yamlet**](https://github.com/piyushdoorwar/yamlet) | Lightweight local-first API client using YAML-based collections | C# |
-| [**transmux**](https://github.com/piyushdoorwar/transmux) | Minimal desktop audio/video converter powered by FFmpeg & Avalonia UI | C#, .NET 10 |
-| [**fluxbar**](https://github.com/piyushdoorwar/fluxbar) | GNOME Shell extension showing live network speed in the top bar | JavaScript |
-| [**mojify**](https://github.com/piyushdoorwar/mojify) | Wayland-native emoji picker for Ubuntu/GNOME | Python |
-| [**dev-tools**](https://github.com/piyushdoorwar/dev-tools) | Browser-based developer toolkit — HTML preview, UUID gen, encryption & more | Vanilla JS |
-
----
-
 ### 📬 Connect with Me
 
 <p>
