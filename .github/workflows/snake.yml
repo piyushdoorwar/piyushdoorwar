@@ -1,0 +1,42 @@
+name: Contribution Snake
+
+# Generates the "snake eating the contribution graph" animation as SVG files
+# and commits them to the `output` branch of this repo. Like the stats
+# workflow, everything runs in GitHub Actions and the README embeds the result
+# from this repo — no third-party service is contacted at page-load.
+#
+# No secret needed: the contribution graph is public, so the built-in
+# GITHUB_TOKEN is sufficient.
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # daily at 00:00 UTC
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate snake SVGs
+        uses: Platane/snk@v3
+        id: snake
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
+
+      - name: Publish to the output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "Update contribution snake"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
