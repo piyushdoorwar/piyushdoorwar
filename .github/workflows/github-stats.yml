@@ -1,0 +1,73 @@
+name: GitHub Stats
+
+# Self-hosted GitHub stats: runs on GitHub Actions, pulls data via the GitHub
+# API using the jstrieb/github-stats tool, and commits the generated SVGs to
+# the `generated` branch of this repo. The README embeds those SVGs, so at
+# page-load the browser only fetches images from this repo — no third-party
+# service is contacted at runtime.
+#
+# Setup (one-time):
+#   1. Create a *classic* Personal Access Token (https://github.com/settings/tokens)
+#      with scopes: read:user, user:email, repo
+#   2. Add it as a repo secret named ACCESS_TOKEN
+#      (Settings → Secrets and variables → Actions → New repository secret)
+#   3. Run this workflow once from the Actions tab ("Run workflow").
+
+on:
+  schedule:
+    - cron: "5 0 * * *"   # daily at 00:05 UTC
+  workflow_dispatch: {}    # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+# The github-stats release pinned below. Bump this to update the tool.
+env:
+  GITHUB_STATS_VERSION: "2.0.1"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download github-stats binary
+        run: |
+          set -euo pipefail
+          curl -fsSL -o "$RUNNER_TEMP/github-stats" \
+            "https://github.com/jstrieb/github-stats/releases/download/${GITHUB_STATS_VERSION}/github-stats_x86_64-linux"
+          chmod +x "$RUNNER_TEMP/github-stats"
+
+      - name: Generate SVGs
+        working-directory: ${{ runner.temp }}
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          EXCLUDE_PRIVATE: "false"
+          SILENT: "true"
+          MAX_RETRIES: "5"
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/github-stats"
+          ls -la overview.svg languages.svg
+
+      - name: Publish to the generated branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          REPO="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          # Clone the generated branch if it exists; otherwise start it as an
+          # orphan branch with no history from main.
+          if ! git clone --depth 1 --branch generated "$REPO" pub 2>/dev/null; then
+            git clone --depth 1 "$REPO" pub
+            git -C pub switch --orphan generated
+            git -C pub rm -rfq . 2>/dev/null || true
+          fi
+
+          cp "$RUNNER_TEMP/overview.svg" "$RUNNER_TEMP/languages.svg" pub/
+
+          cd pub
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add overview.svg languages.svg
+          git commit -m "Update generated stats images" || { echo "No changes to publish"; exit 0; }
+          git push origin generated
